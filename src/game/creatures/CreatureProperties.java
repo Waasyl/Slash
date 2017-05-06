@@ -9,4 +9,12 @@ public class CreatureProperties {
     int healthPoints;
     int xp;
     int lvl;
+
+    public CreatureProperties(int damage, int defence, int healthPoints, int xp, int lvl) {
+        this.damage = damage;
+        this.defence = defence;
+        this.healthPoints = healthPoints;
+        this.xp = xp;
+        this.lvl = lvl;
+    }
 }
