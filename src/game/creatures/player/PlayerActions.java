@@ -35,6 +35,13 @@ public class PlayerActions {
             System.out.println("You hit, and cause " + damage*-1 + " dmg");
         }
     }
+    public static boolean checkIfAlive(Player player){
+        if(player.getHealthPoints() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 }

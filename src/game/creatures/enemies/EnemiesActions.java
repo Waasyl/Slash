@@ -18,6 +18,14 @@ public class EnemiesActions {
         }else {
             player.setHealthPoints(player.getHealthPoints()+damage);
             System.out.println("You were hit, and get " + damage*-1 + " dmg");
+            enemy.setXp(enemy.getXp()+1);
+        }
+    }
+    public static boolean checkIfAlive(Enemy enemy){
+        if(enemy.getHealthPoints() > 0){
+            return true;
+        }else{
+            return false;
         }
     }
 }

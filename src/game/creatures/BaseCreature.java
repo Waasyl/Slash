@@ -1,7 +1,7 @@
 package game.creatures;
 
 /**
- * Created by marta on 06.05.2017.
+ * Created by lukasz on 06.05.2017.
  */
 public class BaseCreature {
     private int maxDamage;
