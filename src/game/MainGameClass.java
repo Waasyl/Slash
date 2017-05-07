@@ -6,6 +6,8 @@ import game.creatures.enemies.Enemy;
 import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 
+import java.util.Scanner;
+
 /**
  * Created by lukasz on 06.05.2017.
  */
@@ -19,6 +21,24 @@ public class MainGameClass {
         PlayerActions.stay(player);
         EnemiesActions.attack(player,zombie);
         PlayerActions.attack(player,zombie);
+        PlayerActions.move(tab);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What do you want to do?");
+        GameInterface.menu();
+        int choice = scanner.nextInt();
+        switch(choice){
+            case 1:
+                PlayerActions.move(tab);
+                break;
+            case 2:
+                PlayerActions.stay(player);
+                break;
+            case 3:
+                System.out.println("Game ended");
+                break;
+            default:
+                System.out.println("Wrong choice");
+        }
 
 
     }
