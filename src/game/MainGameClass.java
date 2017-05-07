@@ -13,11 +13,12 @@ public class MainGameClass {
     public static void main(String[] args) {
         System.out.println("Test class");
         int[] tab = new int[20];
-        Player player = new Player(5,0,3,10,0,1);
-        Enemy zombie = new Enemy(3,0,2,5,0,1);
+        Player player = new Player(5,0,2,10,0,1);
+        Enemy zombie = new Enemy(6,0,2,5,0,1);
 
         PlayerActions.stay(player);
-        EnemiesActions.attack(zombie,player);
+        EnemiesActions.attack(player,zombie);
+        PlayerActions.attack(player,zombie);
 
     }
 }

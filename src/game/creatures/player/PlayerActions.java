@@ -1,5 +1,8 @@
 package game.creatures.player;
 
+import game.creatures.enemies.Enemy;
+
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -22,16 +25,15 @@ public class PlayerActions {
     }
 
 
-    public static int attack(int maxDamage, int minDamage, int opponentDef,int opponentHp) {
-        Scanner scanner = new Scanner(System.in);
-        int damage = opponentDef-(scanner.nextInt(minDamage)+maxDamage);
+    public static void attack(Player player, Enemy enemy) {
+        Random random = new Random();
+        int damage = enemy.getDefence()-(random.nextInt(player.getMaxDamage())+player.getMinDamage());
         if(damage >= 0){
             System.out.println("You made no damage");
         }else {
-            opponentHp = opponentHp+damage;
+            enemy.setHealthPoints(enemy.getHealthPoints()+damage);
             System.out.println("You hit, and cause " + damage*-1 + " dmg");
         }
-        return opponentHp;
     }
 
 
