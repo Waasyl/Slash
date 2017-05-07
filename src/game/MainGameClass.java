@@ -28,12 +28,12 @@ public class MainGameClass {
         int choice = scanner.nextInt();
         switch(choice){
             case 1:
-                PlayerActions.move(tab);
+                GameInterface.afterMove(tab);
                 break;
             case 2:
                 PlayerActions.stay(player);
                 break;
-            case 3:
+            case 0:
                 System.out.println("Game ended");
                 break;
             default:

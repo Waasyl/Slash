@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class PlayerActions {
 
-
+//wrong idea
     public static int[] move(int [] array){
         for (int i = 0; i < array.length; i++) {
             i++;
@@ -43,6 +43,9 @@ public class PlayerActions {
             return false;
         }
     }
+    public static int[] runAway(int[] tab){
 
+    return null;
+    }
 
 }
