@@ -28,7 +28,7 @@ public class MainGameClass {
         int choice = scanner.nextInt();
         switch(choice){
             case 1:
-                GameInterface.afterMove(tab);
+                GameInterface.afterMove(tab,player,zombie);
                 break;
             case 2:
                 PlayerActions.stay(player);
