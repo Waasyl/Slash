@@ -33,6 +33,7 @@ public class PlayerActions {
         }else {
             enemy.setHealthPoints(enemy.getHealthPoints()+damage);
             System.out.println("You hit, and cause " + damage*-1 + " dmg");
+            player.setXp(enemy.getXp()+1);
         }
     }
     public static boolean checkIfAlive(Player player){
