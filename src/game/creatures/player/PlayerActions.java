@@ -22,7 +22,7 @@ public class PlayerActions {
     }
 
 
-    public int attack(int maxDamage, int minDamage, int opponentDef,int opponentHp) {
+    public static int attack(int maxDamage, int minDamage, int opponentDef,int opponentHp) {
         Scanner scanner = new Scanner(System.in);
         int damage = opponentDef-(scanner.nextInt(minDamage)+maxDamage);
         if(damage >= 0){
@@ -31,7 +31,7 @@ public class PlayerActions {
             opponentHp = opponentHp+damage;
             System.out.println("You hit, and cause " + damage*-1 + " dmg");
         }
-        return opponentDef-damage;
+        return opponentHp;
     }
 
 

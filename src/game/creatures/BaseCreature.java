@@ -12,14 +12,14 @@ public class BaseCreature {
     private int lvl;
 
 
-//    public BaseCreature(int maxDamage, int minDamage, int defence, int healthPoints, int xp, int lvl) {
-//        this.maxDamage = maxDamage;
-//        this.minDamage = minDamage;
-//        this.defence = defence;
-//        this.healthPoints = healthPoints;
-//        this.xp = xp;
-//        this.lvl = lvl;
-//    }
+    public BaseCreature(int maxDamage, int minDamage, int defence, int healthPoints, int xp, int lvl) {
+        this.maxDamage = maxDamage;
+        this.minDamage = minDamage;
+        this.defence = defence;
+        this.healthPoints = healthPoints;
+        this.xp = xp;
+        this.lvl = lvl;
+    }
 
     public int getMaxDamage() {
         return maxDamage;
