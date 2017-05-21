@@ -17,29 +17,39 @@ public class MainGameClass {
         int[] tab = new int[20];
         Player player = new Player(5,0,2,10,0,1);
         Enemy zombie = new Enemy(6,0,2,5,0,1);
-
-        PlayerActions.stay(player);
-        EnemiesActions.attack(player,zombie);
-        PlayerActions.attack(player,zombie);
-        PlayerActions.move(tab);
+        int board = 0;
+        int counter = 0;
+        int choice = -1;
+        PlayerActions playerActions = new PlayerActions();
+        EnemiesActions enemiesActions = new EnemiesActions();
+//        playerActions.stay(player);
+//
+//        enemiesActions.attack(zombie,player);
+//        playerActions.attack(player,zombie);
+//        playerActions.move(board);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("What do you want to do?");
-        GameInterface.menu();
-        int choice = scanner.nextInt();
-        switch(choice){
-            case 1:
-                GameInterface.afterMove(tab,player,zombie);
-                break;
-            case 2:
-                PlayerActions.stay(player);
-                break;
-            case 0:
-                System.out.println("Game ended");
-                break;
-            default:
-                System.out.println("Wrong choice");
+        while(board <10 && choice != 0) {
+            GameInterface.infoBar(board,player,counter);
+            zombie.setHealthPoints(5);
+            System.out.println("What do you want to do?");
+            GameInterface.menu();
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    GameInterface.afterMove(board, player, zombie);
+                    counter++;
+                    break;
+                case 2:
+                    playerActions.stay(player);
+                    counter++;
+                   break;
+                case 0:
+                    System.out.println("Game ended");
+                    break;
+                default:
+                    System.out.println("Wrong choice");
+            }
         }
-
 
     }
 }

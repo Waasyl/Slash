@@ -8,24 +8,26 @@ import java.util.Scanner;
 /**
  * Created by Lukasz on 2017-05-07.
  */
-public class EnemiesActions {
+public class EnemiesActions implements IEnemiesActions {
 
-    public static void attack(Player player, Enemy enemy) {
+    public void attack(Enemy enemy, Player player) {
         Random random = new Random();
         int damage = player.getDefence()-(random.nextInt(enemy.getMaxDamage())+enemy.getMinDamage());
         if(damage >= 0){
             System.out.println("Enemy missed");
         }else {
             player.setHealthPoints(player.getHealthPoints()+damage);
-            System.out.println("You were hit, and get " + damage*-1 + " dmg");
+            System.out.println("You were hit, and get " + damage*-1 + " dmg.Your HP: " + player.getHealthPoints());
             enemy.setXp(enemy.getXp()+1);
         }
     }
-    public static boolean checkIfAlive(Enemy enemy){
+    public boolean checkIfAlive(Enemy enemy){
+        boolean flag = true;
         if(enemy.getHealthPoints() > 0){
-            return true;
+            return flag;
         }else{
-            return false;
+            flag = false;
+            return flag;
         }
     }
 }
