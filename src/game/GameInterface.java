@@ -1,11 +1,12 @@
 package game;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import game.creatures.enemies.EnemiesActions;
 import game.creatures.enemies.Enemy;
+import game.creatures.enemies.EnemyGenerator;
 import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -43,10 +44,29 @@ public class GameInterface {
     }
     public static int afterMove(int board,Player player,Enemy enemy){
         PlayerActions playerActions = new PlayerActions();
+        enemy = generateEnemy(enemy);
         board = playerActions.move(board);
         System.out.println("You met a strange creature");
         return choseToFight(board, player, enemy);
 
+    }
+    public static Enemy generateEnemy(Enemy enemy){
+        Random random = new Random();
+        int randomChoice = random.nextInt(3)+1;
+        switch (randomChoice){
+            case 1:
+                enemy = EnemyGenerator.zombie(enemy);
+                break;
+            case 2:
+                enemy = EnemyGenerator.knight(enemy);
+                break;
+            case 3:
+                enemy = EnemyGenerator.goblin(enemy);
+                break;
+        }
+
+
+        return enemy;
     }
     public static void infoBar(int board,Player player,int counter){
         System.out.println("Your position is: " + board + " only " + (10-board) +" fields left.");
@@ -82,17 +102,24 @@ public class GameInterface {
     public static void fight(Player player, Enemy enemy,int board){
         PlayerActions playerActions = new PlayerActions();
         EnemiesActions enemiesActions = new EnemiesActions();
-        while((playerActions.checkIfAlive(player) && enemiesActions.checkIfAlive(enemy)) ) {
-            temp(player,enemy,board);
+        while((enemiesActions.checkIfAlive(enemy) && playerActions.checkIfAlive(player)) ) {
+            fightModule(player,enemy,board);
             choseToFight(board, player, enemy);
 
         }
     }
-    public static void temp(Player player, Enemy enemy,int board){
+    public static void fightModule(Player player, Enemy enemy, int board){
         PlayerActions playerActions = new PlayerActions();
         EnemiesActions enemiesActions = new EnemiesActions();
-        enemiesActions.attack(enemy,player);
-        playerActions.attack(player,enemy);
+        if(player.getHealthPoints() > 0){
+            playerActions.attack(player,enemy);
+            if(enemy.getHealthPoints() > 0) {
+                enemiesActions.attack(enemy, player);
+            }
+
+        } else{
+            System.out.println("You lost all hp and need to recovery");
+        }
 
     }
 

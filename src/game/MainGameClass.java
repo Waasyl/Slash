@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class MainGameClass {
     public static void main(String[] args) {
         Player playerModel = new Player();
-        Enemy zombie = new Enemy(6,0,2,1,0,1);
+        Enemy zombie = new Enemy();
         int board = 0;
         int counter = 0;
         int choice = -1;
