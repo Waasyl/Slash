@@ -25,8 +25,10 @@ public class GameInterface {
         enemy = generateEnemy(enemy);
         board = playerActions.move(board);
         System.out.println("You met a strange creature. A " + enemy.getName() + "!");
-        return choseToFight(board, player, enemy);
-
+        if(enemy.getHealthPoints() > 0) {
+            return choseToFight(board, player, enemy);
+        }
+        else return board;
     }
     public static Enemy generateEnemy(Enemy enemy){
         Random random = new Random();
@@ -55,6 +57,10 @@ public class GameInterface {
 
     private static int choseToFight(int board, Player player, Enemy enemy) {
         PlayerActions playerActions = new PlayerActions();
+        if(enemy.getHealthPoints() <= 0){
+            System.out.println("You won this fight, but it was not easy.\n");
+            return board;
+        }
         System.out.println("What do you want to do?");
         System.out.println("1.Fight");
         System.out.println("2.Run away(you will be moved back 3 fields");
@@ -95,8 +101,6 @@ public class GameInterface {
                 enemiesActions.attack(enemy, player);
             }
 
-        } else{
-            System.out.println("You lost all hp and need to recovery");
         }
 
     }
