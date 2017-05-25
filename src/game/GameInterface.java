@@ -66,7 +66,7 @@ public class GameInterface {
                 fight(player,enemy,board);
                 break;
             case 2:
-                playerActions.runAway(board);
+                board = playerActions.runAway(board);
                 break;
             case 0:
                 break;
