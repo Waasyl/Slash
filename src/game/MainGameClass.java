@@ -5,6 +5,7 @@ import game.creatures.enemies.EnemiesActions;
 import game.creatures.enemies.Enemy;
 import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
+import game.creatures.player.PlayerClass;
 
 import java.util.Scanner;
 
@@ -21,8 +22,8 @@ public class MainGameClass {
         PlayerActions playerActions = new PlayerActions();
         Scanner scanner = new Scanner(System.in);
 
-        Player player = GameInterface.classChoice(playerModel);
-        while(board <10 && choice != 0) {
+        Player player = PlayerClass.classChoice(playerModel);
+        while((board <10 && player.getHealthPoints() > 0) && choice != 0) {
             GameInterface.infoBar(board,player,counter);
             zombie.setHealthPoints(5);
             System.out.println("What do you want to do?");
@@ -44,8 +45,10 @@ public class MainGameClass {
                     System.out.println("Wrong choice");
             }
         }
-        if(board > 10){
+        if(board >= 10 && player.getHealthPoints() > 0){
             System.out.println("Congratulations master. You won!");
+        }else if(player.getHealthPoints() <= 0){
+            System.out.println("You lose");
         }
     }
 }

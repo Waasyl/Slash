@@ -13,28 +13,6 @@ import java.util.Scanner;
  * Created by lukasz on 06.05.2017.
  */
 public class GameInterface {
-    public static Player classChoice(Player player){
-        System.out.println("Please choose your class: ");
-        System.out.println("1. Thief");
-        System.out.println("2. Knight");
-        System.out.println("3. Berserk");
-        Scanner scanner = new Scanner(System.in);
-        switch (scanner.nextInt()){
-            case 1:
-                player = new Player(5,2,2,20,1,1);
-                break;
-            case 2:
-                player = new Player(7,0,3,15,1,1);
-                break;
-            case 3:
-                player = new Player(5,1,4,10,1,1);
-                break;
-            default:
-                System.out.println("Wrong choice");
-        }
-
-        return player;
-    }
 
 
     public static void menu(){
@@ -46,7 +24,7 @@ public class GameInterface {
         PlayerActions playerActions = new PlayerActions();
         enemy = generateEnemy(enemy);
         board = playerActions.move(board);
-        System.out.println("You met a strange creature");
+        System.out.println("You met a strange creature. A " + enemy.getName() + "!");
         return choseToFight(board, player, enemy);
 
     }
