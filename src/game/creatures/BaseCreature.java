@@ -11,6 +11,9 @@ public class BaseCreature {
     private int xp;
     private int lvl;
 
+    public BaseCreature() {
+
+    }
 
     public BaseCreature(int maxDamage, int minDamage, int defence, int healthPoints, int xp, int lvl) {
         this.maxDamage = maxDamage;

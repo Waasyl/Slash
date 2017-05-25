@@ -15,7 +15,8 @@ public class PlayerActions implements IPlayerActions{
     public int move(int board){
         Random random = new Random();
         int rand = random.nextInt(2)+1;
-        return (board + rand);
+        System.out.println("You moved " + rand + " fields");
+        return  (board+rand);
     }
 
     public  void stay(Player player){

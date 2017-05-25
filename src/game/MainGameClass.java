@@ -13,21 +13,15 @@ import java.util.Scanner;
  */
 public class MainGameClass {
     public static void main(String[] args) {
-        System.out.println("Test class");
-        int[] tab = new int[20];
-        Player player = new Player(5,0,2,10,0,1);
-        Enemy zombie = new Enemy(6,0,2,5,0,1);
+        Player playerModel = new Player();
+        Enemy zombie = new Enemy(6,0,2,1,0,1);
         int board = 0;
         int counter = 0;
         int choice = -1;
         PlayerActions playerActions = new PlayerActions();
-        EnemiesActions enemiesActions = new EnemiesActions();
-//        playerActions.stay(player);
-//
-//        enemiesActions.attack(zombie,player);
-//        playerActions.attack(player,zombie);
-//        playerActions.move(board);
         Scanner scanner = new Scanner(System.in);
+
+        Player player = GameInterface.classChoice(playerModel);
         while(board <10 && choice != 0) {
             GameInterface.infoBar(board,player,counter);
             zombie.setHealthPoints(5);
@@ -36,7 +30,7 @@ public class MainGameClass {
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    GameInterface.afterMove(board, player, zombie);
+                    board = GameInterface.afterMove(board, player, zombie);
                     counter++;
                     break;
                 case 2:
@@ -50,6 +44,8 @@ public class MainGameClass {
                     System.out.println("Wrong choice");
             }
         }
-
+        if(board > 10){
+            System.out.println("Congratulations master. You won!");
+        }
     }
 }
