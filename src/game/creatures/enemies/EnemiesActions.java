@@ -12,13 +12,21 @@ public class EnemiesActions implements IEnemiesActions {
 
     public void attack(Enemy enemy, Player player) {
         Random random = new Random();
+
+        int crit = random.nextInt(10)+1;
         int damage = player.getDefence()-(random.nextInt(enemy.getMaxDamage())+enemy.getMinDamage());
         if(damage >= 0){
             System.out.println("Enemy missed");
         }else {
-            player.setHealthPoints(player.getHealthPoints()+damage);
-            System.out.println("You were hit, and get " + damage*-1 + " dmg.Your HP: " + player.getHealthPoints());
-            enemy.setXp(enemy.getXp()+1);
+            if (crit == 1) {
+                int critDamage = player.getDefence() - (enemy.getMaxDamage()*2);
+                player.setHealthPoints(player.getHealthPoints() + critDamage);
+                System.out.println("ENEMY CRITICAL HIT! " + critDamage * -1 + " DMG!! Your HP: " + enemy.getHealthPoints());
+            } else {
+                player.setHealthPoints(player.getHealthPoints() + damage);
+                System.out.println("You were hit, and get " + damage * -1 + " dmg.Your HP: " + player.getHealthPoints());
+                enemy.setXp(enemy.getXp() + 1);
+            }
         }
     }
     public boolean checkIfAlive(Enemy enemy){

@@ -21,7 +21,10 @@ public class MainGameClass {
         int choice = -1;
         PlayerActions playerActions = new PlayerActions();
         Scanner scanner = new Scanner(System.in);
+        System.out.println("                 WELCOME IN SLASH!               ");
+        System.out.println("                    have fun\n\n");
 
+        playerActions.playerName(playerModel);
         Player player = PlayerClass.classChoice(playerModel);
         while((board <10 && player.getHealthPoints() > 0) && choice != 0) {
             GameInterface.infoBar(board,player,counter);

@@ -10,7 +10,13 @@ import java.util.Scanner;
  */
 public class PlayerActions implements IPlayerActions{
 
-//wrong idea
+    public Player playerName(Player player){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("              Please enter your name: ");
+        player.setName(scanner.nextLine());
+        return player;
+    }
+
 
     public int move(int board){
         Random random = new Random();
@@ -28,13 +34,22 @@ public class PlayerActions implements IPlayerActions{
 
     public  void attack(Player player, Enemy enemy) {
         Random random = new Random();
+        int crit = random.nextInt(10)+1;
+
         int damage = enemy.getDefence()-(random.nextInt(player.getMaxDamage())+player.getMinDamage());
         if(damage >= 0){
             System.out.println("You made no damage");
         }else {
-            enemy.setHealthPoints(enemy.getHealthPoints()+damage);
-            System.out.println("You hit, and cause " + damage*-1 + " dmg. Enemy HP: " + enemy.getHealthPoints());
-            player.setXp(enemy.getXp()+1);
+            if(crit == 1){
+                int critDamage = enemy.getDefence() - (player.getMaxDamage()*2);
+                enemy.setHealthPoints(enemy.getHealthPoints() + critDamage);
+                System.out.println("CRITICAL HIT! " + critDamage * -1 + " DMG!! Enemy HP: " + enemy.getHealthPoints());
+
+            }else {
+                enemy.setHealthPoints(enemy.getHealthPoints() + damage);
+                System.out.println("You hit, and cause " + damage * -1 + " dmg. Enemy HP: " + enemy.getHealthPoints());
+                player.setXp(enemy.getXp() + 1);
+            }
         }
     }
     public boolean checkIfAlive(Player player){

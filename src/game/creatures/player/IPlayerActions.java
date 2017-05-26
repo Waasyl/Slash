@@ -20,4 +20,6 @@ public interface IPlayerActions {
 
     int runAway(int board);
 
+    Player playerName(Player player);
+
 }

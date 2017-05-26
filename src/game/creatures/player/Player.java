@@ -7,6 +7,8 @@ import game.creatures.enemies.Enemy;
  * Created by Lukasz on 2017-05-07.
  */
 public class Player extends BaseCreature {
+    String name;
+
     public Player() {
 
     }
@@ -15,6 +17,11 @@ public class Player extends BaseCreature {
         super(maxDamage, minDamage, defence, healthPoints, xp, lvl);
     }
 
+    public String getName() {
+        return name;
+    }
 
-
+    public void setName(String name) {
+        this.name = name;
+    }
 }

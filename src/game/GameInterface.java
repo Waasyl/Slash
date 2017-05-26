@@ -49,8 +49,8 @@ public class GameInterface {
         return enemy;
     }
     public static void infoBar(int board,Player player,int counter){
-        System.out.println("Your position is: " + board + " only " + (10-board) +" fields left.");
-        System.out.println("Yourh HP is :" + player.getHealthPoints());
+        System.out.println("\nYour position is: " + board + " only " + (10-board) +" field/s left.");
+        System.out.println("Your HP is :" + player.getHealthPoints());
         System.out.println("It took you: " + counter + " step/s");
 
     }
@@ -58,10 +58,11 @@ public class GameInterface {
     private static int choseToFight(int board, Player player, Enemy enemy) {
         PlayerActions playerActions = new PlayerActions();
         if(enemy.getHealthPoints() <= 0){
-            System.out.println("You won this fight, but it was not easy.\n");
+            System.out.println("You won this fight.\n");
             return board;
         }
-        System.out.println("What do you want to do?");
+
+        System.out.println("\nWhat do you want to do?");
         System.out.println("1.Fight");
         System.out.println("2.Run away(you will be moved back 3 fields");
         System.out.println("0.Exit game");
@@ -69,26 +70,29 @@ public class GameInterface {
         int choice = scanner.nextInt();
         switch(choice){
             case 1:
-                fight(player,enemy,board);
+                fight(player,enemy,board,choice);
                 break;
             case 2:
+//              TODO
+//              Try to fix attack after chosing RunAway(if fight was initialized)
                 board = playerActions.runAway(board);
                 break;
             case 0:
                 break;
             default:
                 System.out.println("Wrong choice");
+                break;
 
         }
         return board;
     }
 
-    public static void fight(Player player, Enemy enemy,int board){
+    public static void fight(Player player, Enemy enemy,int board,int choice){
         PlayerActions playerActions = new PlayerActions();
         EnemiesActions enemiesActions = new EnemiesActions();
-        while((enemiesActions.checkIfAlive(enemy) && playerActions.checkIfAlive(player)) ) {
-            fightModule(player,enemy,board);
-            choseToFight(board, player, enemy);
+        while((enemiesActions.checkIfAlive(enemy) && playerActions.checkIfAlive(player))) {
+                fightModule(player, enemy, board);
+                choseToFight(board, player, enemy);
 
         }
     }

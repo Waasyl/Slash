@@ -7,10 +7,10 @@ import java.util.Scanner;
  */
 public class PlayerClass {
     public static Player classChoice(Player player){
-        System.out.println("Please choose your class: ");
-        System.out.println("1. Thief");
-        System.out.println("2. Knight");
-        System.out.println("3. Berserk");
+        System.out.println("                Please choose your class: ");
+        System.out.println("                  1. Thief");
+        System.out.println("                  2. Knight");
+        System.out.println("                  3. Berserk");
         Scanner scanner = new Scanner(System.in);
         switch (scanner.nextInt()){
             case 1:
@@ -23,9 +23,12 @@ public class PlayerClass {
                 player = new Player(5,1,4,10,1,1);
                 break;
             default:
-                System.out.println("Wrong choice");
+                System.out.println("              Wrong choice");
         }
 
+        for (int i = 0; i < 18; i++) {
+            System.out.println();
+        }
         return player;
     }
 }
