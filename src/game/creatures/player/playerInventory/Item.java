@@ -9,13 +9,15 @@ public class Item {
     int minDamage;
     int defence;
     int healthPoints;
+    InventoryType inventoryType;
 
-    public Item(String name, int maxDamage, int minDamage, int defence, int healthPoints) {
+    public Item(String name,InventoryType inventoryType, int maxDamage, int minDamage, int defence, int healthPoints) {
         this.name = name;
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
         this.defence = defence;
         this.healthPoints = healthPoints;
+        this.inventoryType = inventoryType;
     }
 
     public String getName() {
@@ -58,9 +60,17 @@ public class Item {
         this.healthPoints = healthPoints;
     }
 
+    public InventoryType getInventoryType() {
+        return inventoryType;
+    }
+
+    public void setInventoryType(InventoryType inventoryType) {
+        this.inventoryType = inventoryType;
+    }
+
     @Override
     public String toString() {
-        return  name  +
+        return  name  + ", type " + inventoryType +
                 ", damage " + minDamage +
                 "-" + maxDamage +
                 ", def=" + defence +

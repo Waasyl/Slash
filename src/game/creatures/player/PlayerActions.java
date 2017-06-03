@@ -1,6 +1,8 @@
 package game.creatures.player;
 
 import game.creatures.enemies.Enemy;
+import game.creatures.player.playerInventory.InventoryType;
+import game.creatures.player.playerInventory.Item;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -66,6 +68,17 @@ public class PlayerActions implements IPlayerActions{
         } else {
             return board - 3;
         }
+    }
+    public Player putOn(Player player,Item item){
+        
+        if(item.getInventoryType().equals(InventoryType.WEAPON)){
+            player.setWeapon(item);
+        }else {
+            player.setArmour(item);
+        }
+
+
+        return player;
     }
 
 }
