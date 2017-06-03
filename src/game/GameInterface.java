@@ -87,7 +87,10 @@ public class GameInterface {
         return board;
     }
 
+
+
     public static void fight(Player player, Enemy enemy,int board,int choice){
+
         PlayerActions playerActions = new PlayerActions();
         EnemiesActions enemiesActions = new EnemiesActions();
         while((enemiesActions.checkIfAlive(enemy) && playerActions.checkIfAlive(player))) {
