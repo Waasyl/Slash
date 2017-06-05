@@ -7,6 +7,7 @@ import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 import game.creatures.player.PlayerClass;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -32,6 +33,8 @@ public class MainGameClass {
             System.out.println("What do you want to do?");
             GameInterface.menu();
             choice = scanner.nextInt();
+//        TODO
+//        handle exception
             switch (choice) {
                 case 1:
                     board = GameInterface.afterMove(board, player, zombie);
@@ -41,6 +44,9 @@ public class MainGameClass {
                     playerActions.stay(player);
                     counter++;
                    break;
+                case 3:
+                    GameInterface.inventory(player);
+                    break;
                 case 0:
                     System.out.println("Game ended");
                     break;

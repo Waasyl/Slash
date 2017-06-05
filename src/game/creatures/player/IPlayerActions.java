@@ -1,6 +1,7 @@
 package game.creatures.player;
 
 import game.creatures.enemies.Enemy;
+import game.creatures.player.playerInventory.Item;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -21,5 +22,9 @@ public interface IPlayerActions {
     int runAway(int board);
 
     Player playerName(Player player);
+
+    Player putOn(Player player);
+
+    Player takeOff(Player player);
 
 }

@@ -10,7 +10,7 @@ public class EnemyGenerator {
     public static Enemy zombie(Enemy enemy){
         Random random = new Random();
         int healthPoints = random.nextInt(5)+3;
-        enemy = new Enemy("Zombie",3,1,2,healthPoints,1,1);
+        enemy = new Enemy("Zombie",4,3,2,healthPoints,1,1);
        return enemy;
     }
 
@@ -24,7 +24,7 @@ public class EnemyGenerator {
     public static Enemy goblin(Enemy enemy){
         Random random = new Random();
         int healthPoints = random.nextInt(4)+2;
-        enemy = new Enemy("Goblin",4,1,3,healthPoints,1,1);
+        enemy = new Enemy("Goblin",5,0,3,healthPoints,1,1);
         return enemy;
     }
 

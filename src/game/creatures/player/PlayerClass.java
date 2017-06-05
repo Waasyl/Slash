@@ -1,5 +1,9 @@
 package game.creatures.player;
 
+import game.creatures.player.playerInventory.Item;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,6 +16,9 @@ public class PlayerClass {
         System.out.println("                  2. Knight");
         System.out.println("                  3. Berserk");
         Scanner scanner = new Scanner(System.in);
+        List<Item> inventory = new ArrayList<>();
+        //        TODO
+//        handle exception
         switch (scanner.nextInt()){
             case 1:
                 player = new Player(5,2,2,20,1,1);
@@ -25,7 +32,7 @@ public class PlayerClass {
             default:
                 System.out.println("              Wrong choice");
         }
-
+        player.setInventory(inventory);
         for (int i = 0; i < 18; i++) {
             System.out.println();
         }

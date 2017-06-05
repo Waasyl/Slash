@@ -50,9 +50,7 @@ public class Player extends BaseCreature {
     }
 
     public void setArmour(Item armour) {
-            if (armour.getInventoryType().equals(InventoryType.ARMOUR)) {
-                this.armour = armour;
-            }
+            this.armour = armour;
     }
 
     public Item getWeapon() {
@@ -65,10 +63,12 @@ public class Player extends BaseCreature {
     }
 
     public void setWeapon(Item weapon) {
+        this.weapon = weapon;
 
-        if(weapon.getInventoryType().equals(InventoryType.WEAPON)){
-            this.weapon = weapon;
-        }
+    }
 
+    @Override
+    public String toString() {
+        return "Player{} " + super.toString();
     }
 }

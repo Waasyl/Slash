@@ -20,6 +20,8 @@ public class PlayerInventory {
         return inventory;
     }
     public List<Item> remove(List<Item> inventory){
+//  TODO
+//   handle situation if inventory is empty
         display(inventory);
         try {
             Scanner scanner = new Scanner(System.in);

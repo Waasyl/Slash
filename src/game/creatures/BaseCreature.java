@@ -71,4 +71,16 @@ public class BaseCreature {
     public void setLvl(int lvl) {
         this.lvl = lvl;
     }
+
+    @Override
+    public String toString() {
+        return "BaseCreature{" +
+                "maxDamage=" + maxDamage +
+                ", minDamage=" + minDamage +
+                ", defence=" + defence +
+                ", healthPoints=" + healthPoints +
+                ", xp=" + xp +
+                ", lvl=" + lvl +
+                '}';
+    }
 }
