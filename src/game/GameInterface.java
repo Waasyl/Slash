@@ -62,6 +62,7 @@ public class GameInterface {
         PlayerActions playerActions = new PlayerActions();
         if(enemy.getHealthPoints() <= 0){
             System.out.println("You won this fight.\n");
+
             return board;
         }
 
