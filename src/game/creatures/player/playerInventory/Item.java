@@ -11,6 +11,10 @@ public class Item {
     int healthPoints;
     InventoryType inventoryType;
 
+    public Item(){
+
+    }
+
     public Item(String name,InventoryType inventoryType, int maxDamage, int minDamage, int defence, int healthPoints) {
         this.name = name;
         this.maxDamage = maxDamage;

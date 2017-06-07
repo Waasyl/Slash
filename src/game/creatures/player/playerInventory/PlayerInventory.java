@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class PlayerInventory {
 
 
-    public List<Item> add(List<Item> inventory,Item item){
+    public static List<Item> add(List<Item> inventory,Item item){
         if(inventory.size() < 5){
             inventory.add(item);
         }else{
@@ -19,9 +19,7 @@ public class PlayerInventory {
         }
         return inventory;
     }
-    public List<Item> remove(List<Item> inventory) {
-//  TODO
-//   handle situation if inventory is empty
+    public static List<Item> remove(List<Item> inventory) {
 
         if (inventory.isEmpty()) {
             System.out.println("Your inventory is empty");
@@ -40,7 +38,7 @@ public class PlayerInventory {
         }
         return inventory;
     }
-    public void display(List<Item> inventory) {
+    public static void display(List<Item> inventory) {
         if (inventory.isEmpty()) {
             System.out.println("Inventory empty.Better find something to wear.");
         } else {

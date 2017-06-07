@@ -69,6 +69,6 @@ public class Player extends BaseCreature {
 
     @Override
     public String toString() {
-        return "Player{} " + super.toString();
+        return name + super.toString() + "\n Weapon: " + weapon +  "\n Armour: " + armour;
     }
 }

@@ -17,6 +17,9 @@ public class PlayerActions implements IPlayerActions{
         Scanner scanner = new Scanner(System.in);
         System.out.print("              Please enter your name: ");
         player.setName(scanner.nextLine());
+        for (int i = 0; i < 18; i++) {
+            System.out.println();
+        }
         return player;
     }
 
@@ -28,14 +31,14 @@ public class PlayerActions implements IPlayerActions{
         return  (board+rand);
     }
 
-    public  void stay(Player player){
+    public void stay(Player player){
         int HP = player.getHealthPoints();
         HP++;
         player.setHealthPoints(HP);
     }
 
 
-    public  void attack(Player player, Enemy enemy) {
+    public void attack(Player player, Enemy enemy) {
         Random random = new Random();
         int crit = random.nextInt(10)+1;
 
@@ -70,63 +73,73 @@ public class PlayerActions implements IPlayerActions{
             return board - 3;
         }
     }
-    public Player putOn(Player player){
+    public Player putOn(Player player,Item item){
+        int playerMaxDmg = player.getMaxDamage();
+        int playerMinDmg = player.getMinDamage();
+        int playerHp = player.getHealthPoints();
+        int playerDefence = player.getDefence();
+
+        int itemMaxDamage = item.getMaxDamage();
+        int itemMinDamage = item.getMinDamage();
+        int itemHp = item.getHealthPoints();
+        int itemDefence = item.getDefence();
+// TODO putting on inventory after finding it should first remove stats of previous inventory form player stats
+        if(item.getInventoryType().equals(InventoryType.WEAPON)){
+            if(player.getWeapon() != null) {
+                PlayerActions playerActions = new PlayerActions();
+                player = playerActions.takeOffWeapon(player);
+            }
+            player.setWeapon(item);
+            player.setMaxDamage(playerMaxDmg+itemMaxDamage);
+            player.setMinDamage(playerMinDmg+itemMinDamage);
+            player.setHealthPoints(playerHp+itemHp);
+            player.setDefence(playerDefence+itemDefence);
+        }else {
+            if(player.getArmour() != null) {
+                PlayerActions playerActions = new PlayerActions();
+                player = playerActions.takeOffArmour(player);
+            }
+            player.setArmour(item);
+            player.setMaxDamage(playerMaxDmg+itemMaxDamage);
+            player.setMinDamage(playerMinDmg+itemMinDamage);
+            player.setHealthPoints(playerHp+itemHp);
+            player.setDefence(playerDefence+itemDefence);
+        }
+
+
+        return player;
+    }
+
+    public Player putOnItemFromInventory(Player player){
+        PlayerActions playerActions = new PlayerActions();
+
         if(player.inventory.isEmpty()){
             System.out.println("Inventory empty.Nothing to put on.");
-        }else{
+        }else {
             PlayerInventory playerInventory = new PlayerInventory();
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("What do you want to put on?");
-            try{
+            try {
                 Thread.sleep(1000);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             playerInventory.display(player.getInventory());
             int choice = scanner.nextInt();
             Item item = player.inventory.get(choice);
-
-            int playerMaxDmg = player.getMaxDamage();
-            int playerMinDmg = player.getMinDamage();
-            int playerHp = player.getHealthPoints();
-            int playerDefence = player.getDefence();
-
-            int itemMaxDamage = item.getMaxDamage();
-            int itemMinDamage = item.getMinDamage();
-            int itemHp = item.getHealthPoints();
-            int itemDefence = item.getDefence();
-
-            if(item.getInventoryType().equals(InventoryType.WEAPON)){
-                player.setWeapon(item);
-                player.setMaxDamage(playerMaxDmg+itemMaxDamage);
-                player.setMinDamage(playerMinDmg+itemMinDamage);
-                player.setHealthPoints(playerHp+itemHp);
-                player.setDefence(playerDefence+itemDefence);
-            }else {
-                player.setArmour(item);
-                player.setMaxDamage(playerMaxDmg+itemMaxDamage);
-                player.setMinDamage(playerMinDmg+itemMinDamage);
-                player.setHealthPoints(playerHp+itemHp);
-                player.setDefence(playerDefence+itemDefence);
-            }
+            player = playerActions.putOn(player, item);
+            player.inventory.remove(choice);
         }
         return player;
     }
+
 
     public Player takeOff(Player player){
         if(player.getArmour() == null || player.getWeapon() == null ){
             System.out.println("You`r naked, you can`t take off anything.");
         }else {
-            int playerMaxDmg = player.getMaxDamage();
-            int playerMinDmg = player.getMinDamage();
-            int playerHp = player.getHealthPoints();
-            int playerDefence = player.getDefence();
-            Item item;
-            int itemMaxDamage;
-            int itemMinDamage;
-            int itemHp;
-            int itemDefence;
+
             System.out.println("What do you want to take off? ");
             System.out.println("1. ARMOUR");
             System.out.println("2. WEAPON");
@@ -135,34 +148,52 @@ public class PlayerActions implements IPlayerActions{
 
             switch (choice) {
                 case "1":
-                    item = player.getArmour();
-                    itemMaxDamage = item.getMaxDamage();
-                    itemMinDamage = item.getMinDamage();
-                    itemHp = item.getHealthPoints();
-                    itemDefence = item.getDefence();
-                    player.setMaxDamage(playerMaxDmg - itemMaxDamage);
-                    player.setMinDamage(playerMinDmg - itemMinDamage);
-                    player.setHealthPoints(playerHp - itemHp);
-                    player.setDefence(playerDefence - itemDefence);
-                    player.setArmour(null);
+                    player = takeOffArmour(player);
                     break;
                 case "2":
-                    item = player.getWeapon();
-                    itemMaxDamage = item.getMaxDamage();
-                    itemMinDamage = item.getMinDamage();
-                    itemHp = item.getHealthPoints();
-                    itemDefence = item.getDefence();
-                    player.setMaxDamage(playerMaxDmg - itemMaxDamage);
-                    player.setMinDamage(playerMinDmg - itemMinDamage);
-                    player.setHealthPoints(playerHp - itemHp);
-                    player.setDefence(playerDefence - itemDefence);
-                    player.setWeapon(null);
+                    player = takeOffWeapon(player);
                     break;
                 default:
                     System.out.println("Wrong choice");
                     break;
             }
         }
+        return player;
+    }
+
+    public Player takeOffWeapon(Player player){
+        Item item = player.getWeapon();
+        int playerMaxDmg = player.getMaxDamage();
+        int playerMinDmg = player.getMinDamage();
+        int playerHp = player.getHealthPoints();
+        int playerDefence = player.getDefence();
+        int itemMaxDamage = item.getMaxDamage();
+        int itemMinDamage = item.getMinDamage();
+        int itemHp = item.getHealthPoints();
+        int itemDefence = item.getDefence();
+        player.setMaxDamage(playerMaxDmg - itemMaxDamage);
+        player.setMinDamage(playerMinDmg - itemMinDamage);
+        player.setHealthPoints(playerHp - itemHp);
+        player.setDefence(playerDefence - itemDefence);
+        player.setWeapon(null);
+        return player;
+
+    }
+    public Player takeOffArmour(Player player){
+        Item item = player.getArmour();
+        int playerMaxDmg = player.getMaxDamage();
+        int playerMinDmg = player.getMinDamage();
+        int playerHp = player.getHealthPoints();
+        int playerDefence = player.getDefence();
+        int itemMaxDamage = item.getMaxDamage();
+        int itemMinDamage = item.getMinDamage();
+        int itemHp = item.getHealthPoints();
+        int itemDefence = item.getDefence();
+        player.setMaxDamage(playerMaxDmg - itemMaxDamage);
+        player.setMinDamage(playerMinDmg - itemMinDamage);
+        player.setHealthPoints(playerHp - itemHp);
+        player.setDefence(playerDefence - itemDefence);
+        player.setArmour(null);
         return player;
     }
 

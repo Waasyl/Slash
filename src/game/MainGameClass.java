@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class MainGameClass {
     public static void main(String[] args) {
         Player playerModel = new Player();
-        Enemy zombie = new Enemy();
+        Enemy enemy = new Enemy();
         int board = 0;
         int counter = 0;
         int choice = -1;
@@ -25,19 +25,18 @@ public class MainGameClass {
         System.out.println("                 WELCOME IN SLASH!               ");
         System.out.println("                    have fun\n\n");
 
-        playerActions.playerName(playerModel);
+
         Player player = PlayerClass.classChoice(playerModel);
+        playerActions.playerName(player);
         while((board <10 && player.getHealthPoints() > 0) && choice != 0) {
             GameInterface.infoBar(board,player,counter);
-            zombie.setHealthPoints(5);
             System.out.println("What do you want to do?");
             GameInterface.menu();
             choice = scanner.nextInt();
-//        TODO
-//        handle exception
+//        TODO handle exception
             switch (choice) {
                 case 1:
-                    board = GameInterface.afterMove(board, player, zombie);
+                    board = GameInterface.afterMove(board, player, enemy);
                     counter++;
                     break;
                 case 2:
@@ -46,6 +45,9 @@ public class MainGameClass {
                    break;
                 case 3:
                     GameInterface.inventory(player);
+                    break;
+                case 4:
+                    GameInterface.showPlayerStats(player);
                     break;
                 case 0:
                     System.out.println("Game ended");

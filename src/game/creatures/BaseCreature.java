@@ -74,8 +74,7 @@ public class BaseCreature {
 
     @Override
     public String toString() {
-        return "BaseCreature{" +
-                "maxDamage=" + maxDamage +
+        return  "{maxDamage=" + maxDamage +
                 ", minDamage=" + minDamage +
                 ", defence=" + defence +
                 ", healthPoints=" + healthPoints +

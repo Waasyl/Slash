@@ -23,7 +23,9 @@ public interface IPlayerActions {
 
     Player playerName(Player player);
 
-    Player putOn(Player player);
+    Player putOn(Player player,Item item);
+
+    Player putOnItemFromInventory(Player player);
 
     Player takeOff(Player player);
 

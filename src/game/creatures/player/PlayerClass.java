@@ -17,25 +17,22 @@ public class PlayerClass {
         System.out.println("                  3. Berserk");
         Scanner scanner = new Scanner(System.in);
         List<Item> inventory = new ArrayList<>();
-        //        TODO
-//        handle exception
-        switch (scanner.nextInt()){
-            case 1:
+        //        TODO handle exception
+        switch (scanner.nextLine()){
+            case "1":
                 player = new Player(5,2,2,20,1,1);
                 break;
-            case 2:
+            case "2":
                 player = new Player(7,0,3,15,1,1);
                 break;
-            case 3:
+            case "3":
                 player = new Player(5,1,4,10,1,1);
                 break;
             default:
                 System.out.println("              Wrong choice");
         }
         player.setInventory(inventory);
-        for (int i = 0; i < 18; i++) {
-            System.out.println();
-        }
+
         return player;
     }
 }

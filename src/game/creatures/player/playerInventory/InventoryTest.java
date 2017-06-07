@@ -3,7 +3,6 @@ package game.creatures.player.playerInventory;
 import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +36,8 @@ public class InventoryTest {
         player.setInventory(inventory);
         System.out.println("XXX");
         playerInventory.display(player.getInventory());
-        playerActions.putOn(player);
-        playerActions.putOn(player);
+        playerActions.putOnItemFromInventory(player);
+        playerActions.putOnItemFromInventory(player);
         System.out.println(player.getArmour());
         System.out.println(player.getWeapon());
         System.out.println(player);

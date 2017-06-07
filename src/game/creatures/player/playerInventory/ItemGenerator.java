@@ -3,7 +3,6 @@ package game.creatures.player.playerInventory;
 import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -14,19 +13,21 @@ import java.util.Scanner;
 public class ItemGenerator {
 
 
-    public Item itemGenerator(){
+    private Item generateItem(){
         Random random = new Random();
 
 
-        Item item = null;
+        Item item = new Item();
         int number = random.nextInt(2)+1;
         if(number == 1) {
+            item.setName("Sword");
             item.setInventoryType(InventoryType.WEAPON);
             item.setMaxDamage(random.nextInt(5)+3);
             item.setMinDamage(random.nextInt(3)+0);
             item.setDefence(random.nextInt(2)+0);
             item.setHealthPoints(random.nextInt(5)+0);
         }else if(number == 2){
+            item.setName("Helmet");
             item.setInventoryType(InventoryType.ARMOUR);
             item.setMaxDamage(random.nextInt(2)+0);
             item.setMinDamage(random.nextInt(1)+0);
@@ -38,7 +39,7 @@ public class ItemGenerator {
     }
 
     public Item dropItem(Player player){
-        Item item = itemGenerator();
+        Item item = generateItem();
         List<Item> inventory = player.getInventory();
         PlayerInventory playerInventory = new PlayerInventory();
         PlayerActions playerActions = new PlayerActions();
@@ -49,14 +50,18 @@ public class ItemGenerator {
         System.out.println("3. Forget");
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
-//        TODO
 
         switch(choice){
             case "1":
                 playerInventory.add(inventory,item);
                 break;
             case "2":
-
+                playerActions.putOn(player,item);
+                break;
+            case "3":
+                break;
+            default:
+                System.out.println("Wrong choice");
                 break;
         }
 
