@@ -117,14 +117,15 @@ public class PlayerActions implements IPlayerActions{
             System.out.println("Inventory empty.Nothing to put on.");
         }else {
             PlayerInventory playerInventory = new PlayerInventory();
-
             Scanner scanner = new Scanner(System.in);
             System.out.println("What do you want to put on?");
+
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             playerInventory.display(player.getInventory());
             int choice = scanner.nextInt();
             Item item = player.inventory.get(choice);

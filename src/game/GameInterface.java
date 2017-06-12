@@ -1,5 +1,6 @@
 package game;
 
+import com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport;
 import game.creatures.enemies.EnemiesActions;
 import game.creatures.enemies.Enemy;
 import game.creatures.enemies.EnemyGenerator;
@@ -17,27 +18,28 @@ import java.util.Scanner;
 public class GameInterface {
 
 
-    public static void menu(){
+    public static void menu() {
         System.out.println("1. Move(1 or 2 fields)");
         System.out.println("2. Stay");
         System.out.println("3. Inventory");
         System.out.println("4. Show stats");
         System.out.println("0. End Game");
     }
-    public static int afterMove(int board,Player player,Enemy enemy){
+
+    public static int afterMove(int board, Player player, Enemy enemy) {
         PlayerActions playerActions = new PlayerActions();
         enemy = generateEnemy(enemy);
         board = playerActions.move(board);
         System.out.println("You met a strange creature. A " + enemy.getName() + "!");
-        if(enemy.getHealthPoints() > 0) {
+        if (enemy.getHealthPoints() > 0) {
             return choseToFight(board, player, enemy);
-        }
-        else return board;
+        } else return board;
     }
-    public static Enemy generateEnemy(Enemy enemy){
+
+    public static Enemy generateEnemy(Enemy enemy) {
         Random random = new Random();
-        int randomChoice = random.nextInt(3)+1;
-        switch (randomChoice){
+        int randomChoice = random.nextInt(3) + 1;
+        switch (randomChoice) {
             case 1:
                 enemy = EnemyGenerator.zombie(enemy);
                 break;
@@ -52,8 +54,9 @@ public class GameInterface {
 
         return enemy;
     }
-    public static void infoBar(int board,Player player,int counter){
-        System.out.println("\nYour position is: " + board + " only " + (10-board) +" field/s left.");
+
+    public static void infoBar(int board, Player player, int counter, int boardSize) {
+        System.out.println("\nYour position is: " + board + " only " + (boardSize - board) + " field/s left.");
         System.out.println("Your HP is :" + player.getHealthPoints());
         System.out.println("It took you: " + counter + " step/s");
 
@@ -61,7 +64,7 @@ public class GameInterface {
 
     private static int choseToFight(int board, Player player, Enemy enemy) {
         PlayerActions playerActions = new PlayerActions();
-        if(enemy.getHealthPoints() <= 0){
+        if (enemy.getHealthPoints() <= 0) {
             System.out.println("You won this fight.\n");
             ItemGenerator itemGenerator = new ItemGenerator();
             itemGenerator.dropItem(player);
@@ -75,9 +78,9 @@ public class GameInterface {
         Scanner scanner = new Scanner(System.in);
 //        TODO handle exception
         int choice = scanner.nextInt();
-        switch(choice){
+        switch (choice) {
             case 1:
-                board = fight(player,enemy,board);
+                board = fight(player, enemy, board);
                 break;
             case 2:
                 board = playerActions.runAway(board);
@@ -94,25 +97,25 @@ public class GameInterface {
     }
 
 
-
-    public static int fight(Player player, Enemy enemy,int board){
+    public static int fight(Player player, Enemy enemy, int board) {
         int tempBoard = board;
 
         PlayerActions playerActions = new PlayerActions();
         EnemiesActions enemiesActions = new EnemiesActions();
-        while((enemiesActions.checkIfAlive(enemy) && playerActions.checkIfAlive(player)) && tempBoard == board) {
-                fightModule(player, enemy);
-                board = choseToFight(board, player, enemy);
+        while ((enemiesActions.checkIfAlive(enemy) && playerActions.checkIfAlive(player)) && tempBoard == board) {
+            fightModule(player, enemy);
+            board = choseToFight(board, player, enemy);
 
         }
         return board;
     }
-    public static void fightModule(Player player, Enemy enemy){
+
+    public static void fightModule(Player player, Enemy enemy) {
         PlayerActions playerActions = new PlayerActions();
         EnemiesActions enemiesActions = new EnemiesActions();
-        if(player.getHealthPoints() > 0){
-            playerActions.attack(player,enemy);
-            if(enemy.getHealthPoints() > 0) {
+        if (player.getHealthPoints() > 0) {
+            playerActions.attack(player, enemy);
+            if (enemy.getHealthPoints() > 0) {
                 enemiesActions.attack(enemy, player);
             }
 
@@ -120,9 +123,8 @@ public class GameInterface {
 
     }
 
-    public static void inventory(Player player){
+    public static void inventory(Player player) {
         PlayerActions playerActions = new PlayerActions();
-//        PlayerInventory playerInventory = new PlayerInventory();
         System.out.println("What do you want to do?");
         System.out.println("1. Show inventory");
         System.out.println("2. Remove from inventory");
@@ -131,7 +133,7 @@ public class GameInterface {
         System.out.println("0. Exit");
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();
-        switch (choice){
+        switch (choice) {
             case "1":
                 PlayerInventory.display(player.getInventory());
                 break;
@@ -151,9 +153,38 @@ public class GameInterface {
         }
     }
 
-    public static void showPlayerStats(Player player){
+    public static void showPlayerStats(Player player) {
         System.out.println(player);
+    }
+
+    public static int boardSizeChoose() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Select board size:");
+        System.out.println("1. 10 fields");
+        System.out.println("2. 20 fields");
+        System.out.println("3. 40 fields");
+        String choice = scanner.nextLine();
+        int boardSize = 0;
+        switch (choice) {
+            case "1":
+                boardSize = 10;
+                break;
+            case "2":
+                boardSize = 20;
+                break;
+            case "3":
+                boardSize = 40;
+                break;
+            default:
+                System.out.println("Wrong choice");
+                break;
+        }
+        return boardSize;
+
     }
 
 
 }
+
+
+

@@ -17,6 +17,7 @@ public class MainGameClass {
     public static void main(String[] args) {
         Player playerModel = new Player();
         Enemy enemy = new Enemy();
+
         int board = 0;
         int counter = 0;
         int choice = -1;
@@ -28,8 +29,9 @@ public class MainGameClass {
 
         Player player = PlayerClass.classChoice(playerModel);
         playerActions.playerName(player);
-        while((board <10 && player.getHealthPoints() > 0) && choice != 0) {
-            GameInterface.infoBar(board,player,counter);
+        int boardSize = GameInterface.boardSizeChoose();
+        while((board < boardSize && player.getHealthPoints() > 0) && choice != 0) {
+            GameInterface.infoBar(board,player,counter, boardSize);
             System.out.println("What do you want to do?");
             GameInterface.menu();
             choice = scanner.nextInt();
