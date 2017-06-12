@@ -17,25 +17,31 @@ public class MainGameClass {
     public static void main(String[] args) {
         GameInterface.intro();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1. Game");
-        System.out.println("2. Scores");
-        System.out.println("0. End");
-        String choice = scanner.nextLine();
-        switch(choice){
-            case "1":
-                game();
-                break;
-            case "2":
-                scores();
-                break;
-            case "0":
-                break;
-            default:
-                System.out.println("Wrong choice");
-                break;
+
+        boolean flag = true;
+        while(flag) {
+            System.out.println("1. Game");
+            System.out.println("2. Scores");
+            System.out.println("0. End");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    game();
+                    flag = false;
+                    break;
+                case "2":
+                    GameInterface.scores();
+                    System.out.println();
+                    break;
+                case "0":
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Wrong choice");
+                    break;
+            }
+
         }
-
-
     }
 
     private static void game() {
@@ -94,9 +100,5 @@ public class MainGameClass {
         }
     }
 
-    public static void scores(){
-        ResultsRepository resultRepository = new FileResultsRepository("C:\\Users\\Lukasz\\Dropbox\\SDA\\MyBetterHomeRepository\\src\\game\\results");
-        GameInterface.showResults(FileResultsRepository.getAllResult());
-    }
 
 }

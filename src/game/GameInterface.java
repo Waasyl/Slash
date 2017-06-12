@@ -8,7 +8,9 @@ import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 import game.creatures.player.playerInventory.ItemGenerator;
 import game.creatures.player.playerInventory.PlayerInventory;
+import game.result.FileResultsRepository;
 import game.result.Result;
+import game.result.ResultsRepository;
 
 import java.util.List;
 import java.util.Random;
@@ -185,11 +187,11 @@ public class GameInterface {
 
     }
     public static void showResults(List<Result> results){
-        System.out.println("Results: ");
+        System.out.println("                Results: ");
         System.out.println("Player                  Score                    Boards Size");
         for (int i = 0; i < results.size(); i++) {
             if(results != null) {
-                System.out.println(results.get(i).getPlayerName() + "                   " + results.get(i).getResult() + "                          " + results.get(i).getBoardSize());
+                System.out.println((i+1) + " " + results.get(i).getPlayerName() + "                   " + results.get(i).getResult() + "                          " + results.get(i).getBoardSize());
 
             }
         }
@@ -211,6 +213,28 @@ public class GameInterface {
             System.out.println("\n                                    have fun\n\n");
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public static void scores(){
+        ResultsRepository resultRepository = new FileResultsRepository("C:\\Users\\Lukasz\\Dropbox\\SDA\\MyBetterHomeRepository\\src\\game\\results");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1. Show all results");
+        System.out.println("2. Show top results");
+        System.out.println("0. Exit");
+        String choice = scanner.nextLine();
+        switch (choice){
+            case "1":
+                GameInterface.showResults(FileResultsRepository.getAllResult());
+                break;
+            case "2":
+                GameInterface.showResults(FileResultsRepository.getTopResult());
+                break;
+            case "0":
+                break;
+            default:
+                System.out.println("Wrong choice");
+                break;
         }
     }
 

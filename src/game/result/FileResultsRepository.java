@@ -1,6 +1,7 @@
 package game.result;
 
 import java.io.*;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,20 +28,6 @@ public class FileResultsRepository implements ResultsRepository {
             e.printStackTrace();
         }
     }
-    public int getSize(){
-        int counter =0;
-
-        try {
-            Scanner scanner = new Scanner(fileWithResults);
-            while(scanner.hasNextLine()){
-                counter++;
-                scanner.nextLine();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return counter;
-    }
 
     public static List<Result> getAllResult(){
         List<Result> results = new LinkedList<>();
@@ -56,6 +43,19 @@ public class FileResultsRepository implements ResultsRepository {
     }
     private static Result mapToResult(String resultString){
         String[] split = resultString.split(";");
-        return new Result(split[0], Integer.valueOf(split[1]),Integer.valueOf(split[1]));
+        return new Result(split[0], Integer.valueOf(split[1]),Integer.valueOf(split[2]));
+    }
+
+    public static List<Result> getTopResult(){
+        List<Result> results = getAllResult();
+        results.sort(new Comparator<Result>() {
+            @Override
+            public int compare(Result o1, Result o2) {
+                return o1.getResult() - o2.getResult();
+            }
+        });
+
+
+        return results;
     }
 }
