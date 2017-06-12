@@ -8,7 +8,9 @@ import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 import game.creatures.player.playerInventory.ItemGenerator;
 import game.creatures.player.playerInventory.PlayerInventory;
+import game.result.Result;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -56,9 +58,9 @@ public class GameInterface {
     }
 
     public static void infoBar(int board, Player player, int counter, int boardSize) {
-        System.out.println("\nYour position is: " + board + " only " + (boardSize - board) + " field/s left.");
+        System.out.println("\nYour position is: " + board + " only " + (boardSize - board) + " field/s. left");
         System.out.println("Your HP is :" + player.getHealthPoints());
-        System.out.println("It took you: " + counter + " step/s");
+        System.out.println("It took you: " + counter + " step/FileResultsRepository");
 
     }
 
@@ -159,10 +161,10 @@ public class GameInterface {
 
     public static int boardSizeChoose() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Select board size:");
-        System.out.println("1. 10 fields");
-        System.out.println("2. 20 fields");
-        System.out.println("3. 40 fields");
+        System.out.println("               Select board size:");
+        System.out.println("               1. 10 fields");
+        System.out.println("               2. 20 fields");
+        System.out.println("               3. 40 fields");
         String choice = scanner.nextLine();
         int boardSize = 0;
         switch (choice) {
@@ -181,6 +183,35 @@ public class GameInterface {
         }
         return boardSize;
 
+    }
+    public static void showResults(List<Result> results){
+        System.out.println("Results: ");
+        System.out.println("Player                  Score                    Boards Size");
+        for (int i = 0; i < results.size(); i++) {
+            if(results != null) {
+                System.out.println(results.get(i).getPlayerName() + "                   " + results.get(i).getResult() + "                          " + results.get(i).getBoardSize());
+
+            }
+        }
+
+    }
+    public static void intro(){
+        try{
+            for (int i = 0; i < 15; i++) {
+                System.out.print("<");
+                Thread.sleep(50);
+            }
+            System.out.print("                 WELCOME IN SLASH!               ");
+
+            for (int i = 0; i < 15; i++) {
+                System.out.print(">");
+                Thread.sleep(50);
+            }
+            Thread.sleep(50);
+            System.out.println("\n                                    have fun\n\n");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

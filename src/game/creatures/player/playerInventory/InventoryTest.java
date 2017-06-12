@@ -4,6 +4,7 @@ import game.creatures.player.Player;
 import game.creatures.player.PlayerActions;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -45,5 +46,6 @@ public class InventoryTest {
         System.out.println(player.getArmour());
         System.out.println(player.getWeapon());
         System.out.println(player);
+
     }
 }

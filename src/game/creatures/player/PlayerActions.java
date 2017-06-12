@@ -17,9 +17,6 @@ public class PlayerActions implements IPlayerActions{
         Scanner scanner = new Scanner(System.in);
         System.out.print("              Please enter your name: ");
         player.setName(scanner.nextLine());
-        for (int i = 0; i < 18; i++) {
-            System.out.println();
-        }
         return player;
     }
 
@@ -135,7 +132,7 @@ public class PlayerActions implements IPlayerActions{
         return player;
     }
 
-
+//TODO handle situation when HP is low, and can fall below 0 after taking off inventory
     public Player takeOff(Player player){
         if(player.getArmour() == null || player.getWeapon() == null ){
             System.out.println("You`r naked, you can`t take off anything.");

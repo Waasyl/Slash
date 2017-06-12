@@ -30,8 +30,7 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Player Name= '" + playerName + '\'' +
-                ", result=" + result +
-                ", boardSize=" + boardSize;
+        return playerName + ';' + result +
+                ";" + boardSize;
     }
 }
