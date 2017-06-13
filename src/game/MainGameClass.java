@@ -51,7 +51,7 @@ public class MainGameClass {
 //        GameInterface.showResults(FileResultsRepository.getAllResult());
         int board = 0;
         int counter = 0;
-        int choice = -1;
+        String choice = "-1";
         PlayerActions playerActions = new PlayerActions();
         Scanner scanner = new Scanner(System.in);
 
@@ -62,29 +62,29 @@ public class MainGameClass {
         for (int i = 0; i < 18; i++) {
             System.out.println();
         }
-        while((board < boardSize && player.getHealthPoints() > 0) && choice != 0) {
+        while((board < boardSize && player.getHealthPoints() > 0) && !choice.equals("0")) {
             GameInterface.infoBar(board,player,counter, boardSize);
             System.out.println("What do you want to do?");
             GameInterface.menu();
-            choice = scanner.nextInt();
-//        TODO handle exception
+            choice = scanner.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     board = GameInterface.afterMove(board, player, enemy);
                     counter++;
                     break;
-                case 2:
+                case "2":
                     playerActions.stay(player);
                     counter++;
                    break;
-                case 3:
+                case "3":
                     GameInterface.inventory(player);
                     break;
-                case 4:
+                case "4":
                     GameInterface.showPlayerStats(player);
                     break;
-                case 0:
+                case "0":
                     System.out.println("Game ended");
+                    choice = "0";
                     break;
                 default:
                     System.out.println("Wrong choice");

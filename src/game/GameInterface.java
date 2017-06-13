@@ -62,7 +62,7 @@ public class GameInterface {
     public static void infoBar(int board, Player player, int counter, int boardSize) {
         System.out.println("\nYour position is: " + board + " only " + (boardSize - board) + " field/s. left");
         System.out.println("Your HP is :" + player.getHealthPoints());
-        System.out.println("It took you: " + counter + " step/FileResultsRepository");
+        System.out.println("It took you: " + counter + " step/s");
 
     }
 
@@ -80,20 +80,20 @@ public class GameInterface {
         System.out.println("2.Run away(you will be moved back 3 fields)");
         System.out.println("0.Exit game");
         Scanner scanner = new Scanner(System.in);
-//        TODO handle exception
-        int choice = scanner.nextInt();
+        String choice = scanner.nextLine();
         switch (choice) {
-            case 1:
+            case "1":
                 board = fight(player, enemy, board);
                 break;
-            case 2:
+            case "2":
                 board = playerActions.runAway(board);
                 break;
-            case 0:
+            case "0":
                 System.exit(1);
                 break;
             default:
-                System.out.println("Wrong choice");
+                System.out.println("Wrong choice. You were so scaried that you misspelled your choice. You run away instantly");
+                board = playerActions.runAway(board);
                 break;
 
         }

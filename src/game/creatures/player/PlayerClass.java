@@ -17,7 +17,6 @@ public class PlayerClass {
         System.out.println("                  3. Berserk");
         Scanner scanner = new Scanner(System.in);
         List<Item> inventory = new ArrayList<>();
-        //        TODO handle exception
         switch (scanner.nextLine()){
             case "1":
                 player = new Player(5,2,2,20,1,1);
@@ -29,7 +28,8 @@ public class PlayerClass {
                 player = new Player(5,1,4,10,1,1);
                 break;
             default:
-                System.out.println("              Wrong choice");
+                System.out.println("              Wrong choice.You`re just a weak peasant.");
+                player = new Player(3,1,1,5,1,1);
         }
         player.setInventory(inventory);
 

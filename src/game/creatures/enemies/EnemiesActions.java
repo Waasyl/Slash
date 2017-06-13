@@ -19,11 +19,10 @@ public class EnemiesActions implements IEnemiesActions {
         if(damage >= 0){
             System.out.println("Enemy missed");
         }else {
-            if (crit == 1) {
-//                TODO fix, enenmy critical takes more player hp than should
+            if (crit <= 2 ) {
                 int critDamage = player.getDefence() - (enemy.getMaxDamage()*2);
                 player.setHealthPoints(player.getHealthPoints() + critDamage);
-                System.out.println("ENEMY CRITICAL HIT! " + critDamage * -1 + " DMG!! Your HP: " + enemy.getHealthPoints());
+                System.out.println("ENEMY CRITICAL HIT! " + critDamage * -1 + " DMG!! Your HP: " + player.getHealthPoints());
             } else {
                 player.setHealthPoints(player.getHealthPoints() + damage);
                 System.out.println("You were hit, and get " + damage * -1 + " dmg.Your HP: " + player.getHealthPoints());
