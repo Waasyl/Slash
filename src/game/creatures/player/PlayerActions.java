@@ -146,10 +146,19 @@ public class PlayerActions implements IPlayerActions{
 
             switch (choice) {
                 case "1":
-                    player = takeOffArmour(player);
+
+                    if (player.getHealthPoints() <= player.getArmour().getHealthPoints()) {
+                        System.out.println("You will die after taking off your armour. You can`t do it.");
+                    } else {
+                        player = takeOffArmour(player);
+                    }
                     break;
                 case "2":
-                    player = takeOffWeapon(player);
+                    if (player.getHealthPoints() <= player.getWeapon().getHealthPoints()) {
+                        System.out.println("You will die after taking off your weapon. You can`t do it.");
+                    }else {
+                        player = takeOffWeapon(player);
+                    }
                     break;
                 default:
                     System.out.println("Wrong choice");

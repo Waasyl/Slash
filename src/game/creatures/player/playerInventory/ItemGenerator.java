@@ -44,28 +44,30 @@ public class ItemGenerator {
         PlayerInventory playerInventory = new PlayerInventory();
         PlayerActions playerActions = new PlayerActions();
         System.out.println("You found item " + item);
-        System.out.println("What do you want to do?");
-        System.out.println("1. Add to inventory");
-        System.out.println("2. Put on");
-        System.out.println("3. Forget");
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine();
+        if(player.getWeapon() == null && item.getInventoryType().equals(InventoryType.WEAPON)){
+            System.out.println("You have take it to your hands. You have weapon now! Yay!");
+            playerActions.putOn(player,item);
+        } else if (player.getArmour() == null && item.getInventoryType().equals(InventoryType.ARMOUR)) {
+            System.out.println("You have put it on your sexy body. You have armour now! Yay!");
+            playerActions.putOn(player,item);
+        }else {
+            System.out.println("What do you want to do?");
+            System.out.println("1. Add to inventory");
+            System.out.println("2. Forget");
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    playerInventory.add(inventory, item);
+                    break;
+                case "2":
+                    break;
+                default:
+                    System.out.println("Wrong choice");
+                    break;
+            }
 
-        switch(choice){
-            case "1":
-                playerInventory.add(inventory,item);
-                break;
-            case "2":
-                playerActions.putOn(player,item);
-                break;
-            case "3":
-                break;
-            default:
-                System.out.println("Wrong choice");
-                break;
         }
-
-
         return item;
     }
 
